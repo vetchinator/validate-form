@@ -172,7 +172,7 @@ export default {
         },
         dateBirth: {
             required,
-            valid: val => moment(val) < new Date(),
+            valid: val => new Date(val) < new Date(),
         },
         phone: {
             required,
@@ -190,7 +190,7 @@ export default {
         },
         dateIssued: {
             required,
-            valid: val => moment(val) < new Date(),
+            valid: val => new Date(val) < new Date(),
         },
     },
     methods: {
