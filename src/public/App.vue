@@ -135,13 +135,16 @@
                 </div> 
             </div>
             <button type="submit" 
-                    :disabled="$v.$invalid"                
+                    :disabled="$v.$invalid" 
+                    @click="successfulIsTrue = !successfulIsTrue"              
             >Отправить
             </button>
-            <button  type="submit"
-                    @click="successfulIsTrue = !successfulIsTrue"
+           <!-- 
+            <button type="submit"
+                    @click="successfulIsTrue = !successfulIsTrue"         
             > Отправить
-            </button>
+            </button> 
+            -->
         </div> 
         </transition>  
             
