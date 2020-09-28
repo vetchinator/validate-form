@@ -326,7 +326,7 @@ body {
 }
 
 h2 {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 .red {
@@ -380,7 +380,7 @@ option {
     color: red;
     flex-grow: 1;
     text-align: right;
-    padding: 3px 4px;
+    padding-top: 3px;
 }
 
 button {
