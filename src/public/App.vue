@@ -413,9 +413,8 @@ button:hover {
     text-align: center;
     align-items: center;
     display: flex;
-    max-width: 400px;
-    max-height: 300px;
-
+    width: 400px;
+    height: 300px;
     background-color: yellowgreen;
     border-radius: 15px;
     position: absolute;
@@ -499,10 +498,16 @@ button:hover {
         width: 100%;
         text-align: left;
     }
+
     input, select {
         width: 100%;
     }
 
+    .msgSuccessful {
+        width: 75%;
+        height: 250px;
+        padding: 5px;
+    }
       
 }
 
