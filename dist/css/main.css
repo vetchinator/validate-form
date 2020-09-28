@@ -36,11 +36,8 @@ body {
 .container > div > div {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     flex-wrap: wrap;
-    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.5);
-    padding: 10px 10px;
-    border-radius: 5px;
 }
 h2 {
     margin-bottom: 20px;
@@ -55,35 +52,26 @@ label {
     margin-right: 10px;
 }
 input, select {
-    padding: 10px 10px;
+    padding: 5px 10px;
     border-radius: 10px;
     border: 1px solid black;
+    overflow-y: hidden;
     width: 65%;
-}
-input[type='checkbox'] {
-    margin: auto;
 }
 select {
     box-sizing: content-box;
-}
-select[multiple='multiple'] {
-    overflow-y: hidden;
-}
-option[disabled] { 
-    display: none;
 }
 input:focus, select:focus {
     background-color: cornsilk;
     outline: none;
 }
 option {
-    padding: 6px 0px;
+    padding: 3px;
 }
 .errorMsg {
     color: red;
     flex-grow: 1;
     text-align: right;
-    padding: 3px 4px;
 }
 button {
     margin-top: 30px;
@@ -111,9 +99,8 @@ button:hover {
     text-align: center;
     align-items: center;
     display: flex;
-    max-width: 400px;
-    max-height: 300px;
-
+    width: 400px;
+    height: 200px;
     background-color: yellowgreen;
     border-radius: 15px;
     position: absolute;
