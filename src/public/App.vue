@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="someAction()" @submit="action">
+    <form @submit.prevent="someAction()" @submit="action()">
         <transition name="scale" appear>  
         <div v-if="!successfulIsTrue">
             <div class="container">
@@ -8,15 +8,21 @@
                     <div>
                     <label for="surname">Фамилия<span class="red">*</span></label>
                     <input id="surname" type="text" v-model="surname" placeholder="Иванов">
-                    <p class="errorMsg" v-if="!$v.surname.valid">
+                    <span class="errorMsg" v-if="!$v.surname.valid">
                         В фамилии недопустимые символы
-                    </p>
+                    </span>
+                    <span class="errorMsg" v-if="!$v.surname.required">
+                        Необходимо заполнить поле
+                    </span>
                     </div>
                     <div>
                         <label for="name">Имя<span class="red">*</span></label>
                         <input id="name" type="text" v-model="name" placeholder="Иван">
                         <span class="errorMsg" v-if="!$v.name.valid">
                                 В имени недопустимые символы
+                        </span>
+                        <span class="errorMsg" v-if="!$v.name.required">
+                        Необходимо заполнить поле
                         </span>
                     </div>
                     <div>
@@ -26,9 +32,12 @@
                     </div>
                     <div>
                         <label for="dateBirth">Дата рождения<span class="red">*</span></label>
-                        <input id="dateBirth" type="date" v-model="dateBirth" @blur="$v.dateBirth.$touch()">
+                        <input id="dateBirth" type="date" v-model="dateBirth" @blur="$v.dateBirth.$touch()" placeholder="01.01.2000">
                         <span class="errorMsg" v-if="!$v.dateBirth.valid && $v.dateBirth.$model">
                             Дата рождения не может быть больше текущей
+                        </span>
+                        <span class="errorMsg" v-if="!$v.dateBirth.required">
+                        Необходимо заполнить поле
                         </span>
                     </div>
                     <div>
@@ -36,6 +45,9 @@
                         <input id="phone" type="tel" v-model="phone" placeholder="790000000">
                         <span class="errorMsg" v-if="!$v.phone.phoneValid && $v.phone.$model">
                             Некорректно введен номер
+                        </span>
+                        <span class="errorMsg" v-if="!$v.phone.required">
+                        Необходимо заполнить поле
                         </span>
                     </div>
                     <div>
@@ -55,9 +67,9 @@
                     </div>
                     <div>
                         <label for="doctor">Лечащий врач</label>
-                        <select v-model="doctor">
-                            <option disabled>Выберите врача</option>
-                            <option selected value="Иванов">Иванов</option>
+                        <select v-model="doctor" aria-placeholder="">
+                            <option value="null" disabled selected>Выберите врача</option>
+                            <option value="Иванов">Иванов</option>
                             <option value="Захаров">Захаров</option>
                             <option value="Чернышева">Чернышева</option>
                         </select>
@@ -90,6 +102,9 @@
                     <div>
                         <label for="city">Город<span class="red">*</span></label>
                         <input id="city" type="text" v-model="city" placeholder="Москва">
+                        <span class="errorMsg" v-if="!$v.city.required">
+                                Необходимо заполнить поле
+                        </span>
                         <span class="errorMsg" v-if="!$v.city.valid && $v.city.$model">
                                 Недопустимые символы
                         </span>
@@ -107,11 +122,14 @@
                     <div>
                         <label for="typeDoc">Тип документа<span class="red">*</span></label>
                         <select id="typeDoc" v-model="typeDoc">
-                            <option disabled>Выберите тип документа</option>
+                            <option disabled value="null">Выберите тип документа</option>
                             <option selected value="Паспорт">Паспорт</option>
-                            <option value=" Свидетельство о рождении"> Свидетельство о рождении</option>
+                            <option value="Свидетельство о рождении"> Свидетельство о рождении</option>
                             <option value="Вод. удостоверение">Вод. удостоверение</option>
                         </select>
+                        <span class="errorMsg" v-if="!$v.typeDoc.required">
+                                Необходимо выбрать документ
+                        </span>
                     </div>
                     <div>
                         <label for="series">Серия </label>
@@ -131,6 +149,9 @@
                         <span class="errorMsg" v-if="!$v.dateIssued.valid && $v.dateIssued.$model">
                             Дата выдачи не может быть больше текущей
                         </span>
+                        <span class="errorMsg" v-if="!$v.dateIssued.required">
+                        Необходимо заполнить поле
+                        </span>
                     </div>  
                 </div> 
             </div>
@@ -139,12 +160,12 @@
                     @click="successfulIsTrue = !successfulIsTrue"              
             >Отправить
             </button>
-           <!-- 
+            
             <button type="submit"
                     @click="successfulIsTrue = !successfulIsTrue"         
             > Отправить
             </button> 
-            -->
+            
         </div> 
         </transition>  
             
@@ -156,6 +177,7 @@
             
             <button class="closeBtn" @click="successfulIsTrue = !successfulIsTrue">Закрыть</button>
             <div class="close" @click="successfulIsTrue = !successfulIsTrue">&times;</div>
+            
             </div> 
         </transition>     
     </form>
@@ -166,7 +188,7 @@
 import { required, minValue } from 'vuelidate/lib/validators';
 
 export default {
-    name: 'App',
+    name: 'App', 
     data() {
         return {
             successfulIsTrue: false,
@@ -177,7 +199,7 @@ export default {
             phone: null,
             gender: null,
             groupClients: [],
-            doctor: "Иванов",
+            doctor: null,
             sendSms: false,
 
             index: null,
@@ -187,12 +209,14 @@ export default {
             street: null,
             house: null,
 
-            typeDoc: 'Паспорт',
+            typeDoc: null,
             series: null,
             number: null,
             whoIssued: null,
             dateIssued: null,
-        };
+
+            newDeal: null,
+        }
     },
 
     validations: {
@@ -215,12 +239,12 @@ export default {
         groupClients: {
             required,    
         },
-        doctor: {
-            required,    
-        },
         city: {
             required,
             valid: val => /^[a-zA-Zа-яёА-ЯЁ\s\-]+$/.test(val),
+        },
+        typeDoc: {
+            required,
         },
         dateIssued: {
             required,
@@ -231,9 +255,19 @@ export default {
         someAction() {
             
         },
+
         action() {
-            console.log('Клиент создан');
-        }
+            this.surname = null;
+            this.$data = Object.assign({}, this.newDeal);
+        },
+
+        clear(){
+            
+        },
+    },
+    created: function () {
+        this.newDeal = Object.assign({}, this.$data);
+        
     },
 }
 </script>
@@ -278,13 +312,17 @@ body {
     border-radius: 10px;
     color: wheat;
     font-size: 20px;
+    
 }
 
 .container > div > div {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     flex-wrap: wrap;
+    box-shadow: inset 0px 0px 10px rgba(0,0,0,0.5);
+    padding: 10px 10px;
+    border-radius: 5px;
 }
 
 h2 {
@@ -303,16 +341,29 @@ label {
 }
 
 input, select {
-    padding: 5px 10px;
+    padding: 10px 10px;
     border-radius: 10px;
     border: 1px solid black;
-    overflow-y: hidden;
     width: 65%;
+}
+
+input[type='checkbox'] {
+    margin: auto;
+    
 }
 
 select {
     box-sizing: content-box;    
 }
+
+select[multiple='multiple'] {
+    overflow-y: hidden;    
+}
+
+
+option[disabled] { 
+    display: none; 
+} 
 
 input:focus, select:focus {
     background-color: cornsilk;
@@ -320,13 +371,16 @@ input:focus, select:focus {
 }
 
 option {
-    padding: 3px;
+    padding: 6px 0px;
 }
+
+
 
 .errorMsg {
     color: red;
     flex-grow: 1;
     text-align: right;
+    padding: 3px 4px;
 }
 
 button {
@@ -359,8 +413,9 @@ button:hover {
     text-align: center;
     align-items: center;
     display: flex;
-    width: 400px;
-    height: 200px;
+    max-width: 400px;
+    max-height: 300px;
+
     background-color: yellowgreen;
     border-radius: 15px;
     position: absolute;
