@@ -373,7 +373,7 @@ input:focus, select:focus {
 }
 
 option {
-    padding: 6px 0px;
+    padding: 3px 3px;
 }
 
 .customCheckbox {
