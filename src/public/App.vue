@@ -133,16 +133,16 @@
                         </span>
                     </div>
                     <div>
-                        <label for="series">Серия </label>
-                        <input type="text">
+                        <label for="series">Серия</label>
+                        <input type="text" v-model="defaultState.series">
                     </div>
                     <div>
                         <label for="number">Номер</label>
-                        <input type="text">
+                        <input type="text" v-model="defaultState.number">
                     </div>
                     <div>
                         <label for="whoIssued">Кем выдан </label>
-                        <input type="text">
+                        <input type="text" v-model="defaultState.whoIssued">
                     </div>
                     <div>
                         <label for="dateIssued">Дата выдачи<span class="red">*</span></label>
