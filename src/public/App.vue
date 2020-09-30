@@ -530,8 +530,7 @@ button:hover {
 }
 
 .appearance-enter-active, .appearance-leave-active {
-    transition: all 1s ease;
-    
+    transition: all 1s ease;  
 }
 
 .appearance-enter, .appearance-leave-to {
