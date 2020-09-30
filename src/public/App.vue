@@ -162,10 +162,11 @@
             >Отправить
             </button>
             
-            <button type="submit"
+           <!-- <button type="submit"
                     @click="successfulIsTrue = !successfulIsTrue"         
             > Отправить
             </button> 
+            -->
             
         </div> 
         </transition>  
