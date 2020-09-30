@@ -7,67 +7,67 @@
                     <h2>Данные</h2>  
                     <div>
                     <label for="surname">Фамилия<span class="red">*</span></label>
-                    <input id="surname" type="text" v-model="surname" placeholder="Иванов">
-                    <span class="errorMsg" v-if="!$v.surname.valid">
+                    <input id="surname" type="text" v-model="defaultState.surname" placeholder="Иванов">
+                    <span class="errorMsg" v-if="!$v.defaultState.surname.valid && $v.defaultState.surname.required">
                         В фамилии недопустимые символы
                     </span>
-                    <span class="errorMsg" v-if="!$v.surname.required">
+                    <span class="errorMsg" v-if="!$v.defaultState.surname.required">
                         Необходимо заполнить поле
                     </span>
                     </div>
                     <div>
                         <label for="name">Имя<span class="red">*</span></label>
-                        <input id="name" type="text" v-model="name" placeholder="Иван">
-                        <span class="errorMsg" v-if="!$v.name.valid">
+                        <input id="name" type="text" v-model="defaultState.name" placeholder="Иван">
+                        <span class="errorMsg" v-if="!$v.defaultState.name.valid && $v.defaultState.name.required">
                                 В имени недопустимые символы
                         </span>
-                        <span class="errorMsg" v-if="!$v.name.required">
+                        <span class="errorMsg" v-if="!$v.defaultState.name.required">
                         Необходимо заполнить поле
                         </span>
                     </div>
                     <div>
                         <label for="secondName">Отчество</label>
-                        <input id="secondName" type="text" v-model="secondName">
+                        <input id="secondName" type="text" v-model="defaultState.secondName">
 
                     </div>
                     <div>
                         <label for="dateBirth">Дата рождения<span class="red">*</span></label>
-                        <input id="dateBirth" type="date" v-model="dateBirth" @blur="$v.dateBirth.$touch()" placeholder="01.01.2000">
-                        <span class="errorMsg" v-if="!$v.dateBirth.valid && $v.dateBirth.$model">
+                        <input id="dateBirth" type="date" v-model="defaultState.dateBirth" @blur="$v.defaultState.dateBirth.$touch()" placeholder="01.01.2000">
+                        <span class="errorMsg" v-if="!$v.defaultState.dateBirth.valid && $v.defaultState.dateBirth.$model">
                             Дата рождения не может быть больше текущей
                         </span>
-                        <span class="errorMsg" v-if="!$v.dateBirth.required">
+                        <span class="errorMsg" v-if="!$v.defaultState.dateBirth.required">
                         Необходимо заполнить поле
                         </span>
                     </div>
                     <div>
                         <label for="phone">Номер телефона<span class="red">*</span></label>
-                        <input id="phone" type="tel" v-model="phone" placeholder="790000000">
-                        <span class="errorMsg" v-if="!$v.phone.phoneValid && $v.phone.$model">
+                        <input id="phone" type="tel" v-model="defaultState.phone" placeholder="790000000">
+                        <span class="errorMsg" v-if="!$v.defaultState.phone.phoneValid && $v.defaultState.phone.$model">
                             Некорректно введен номер
                         </span>
-                        <span class="errorMsg" v-if="!$v.phone.required">
+                        <span class="errorMsg" v-if="!$v.defaultState.phone.required">
                         Необходимо заполнить поле
                         </span>
                     </div>
                     <div>
                         <label for="gender">Пол</label>
-                        <input id="gender" type="text" v-model="gender">
+                        <input id="gender" type="text" v-model="defaultState.gender">
                     </div>
                     <div>
                         <label for="groupClients">Группа клиентов<span class="red">*</span></label>        
-                        <select id="groupClients" multiple v-model="groupClients" size="3">
+                        <select id= "groupClients" multiple v-model="defaultState.groupClients" size="3">
                             <option value="vip">VIP</option>
                             <option value="problem">Проблемные</option>
                             <option value="omc">ОМС</option>
                         </select>  
-                        <span class="errorMsg" v-if="$v.groupClients.$invalid && $v.groupClients.$model">
+                        <span class="errorMsg" v-if="$v.defaultState.groupClients.$invalid && $v.defaultState.groupClients.$model">
                             Необходимо выбрать группу
                         </span>
                     </div>
                     <div>
                         <label for="doctor">Лечащий врач</label>
-                        <select v-model="doctor" aria-placeholder="">
+                        <select v-model="defaultState.doctor">
                             <option value="null" disabled selected>Выберите врача</option>
                             <option value="Иванов">Иванов</option>
                             <option value="Захаров">Захаров</option>
@@ -75,8 +75,9 @@
                         </select>
                     </div>
                     <div>
-                        <label for="sendSms">Не&nbsp;отправлять СМС</label>
-                        <input id="sendSms" type="checkbox" v-model="sendSms">
+                        <label>Не&nbsp;отправлять СМС</label>
+                        <input id="sendSms" type="checkbox" v-model="defaultState.sendSms" class="customCheckbox">
+                        <label for="sendSms"></label>
                         <span></span>
                     </div>
                     <div style="max-width: 310px;
@@ -89,45 +90,45 @@
                     <h2>Адрес:</h2>   
                     <div>
                         <label for="index">Индекс</label>
-                        <input id="index" type="text" v-model="index">
+                        <input id="index" type="text" v-model="defaultState.index">
                     </div>
                     <div>
                         <label for="country">Страна</label>
-                        <input id="country" type="text" v-model="country">
+                        <input id="country" type="text" v-model="defaultState.country">
                     </div>
                     <div>
                         <label for="region">Область</label>
-                        <input id="region" type="text" v-model="region">
+                        <input id="region" type="text" v-model="defaultState.region">
                     </div>
                     <div>
                         <label for="city">Город<span class="red">*</span></label>
-                        <input id="city" type="text" v-model="city" placeholder="Москва">
-                        <span class="errorMsg" v-if="!$v.city.required">
+                        <input id="city" type="text" v-model="defaultState.city" placeholder="Москва">
+                        <span class="errorMsg" v-if="!$v.defaultState.city.required">
                                 Необходимо заполнить поле
                         </span>
-                        <span class="errorMsg" v-if="!$v.city.valid && $v.city.$model">
+                        <span class="errorMsg" v-if="!$v.defaultState.city.valid && $v.defaultState.city.$model">
                                 Недопустимые символы
                         </span>
                     </div>
                     <div>
                         <label for="street">Улица</label>
-                        <input id="street" type="text" v-model="street">
+                        <input id="street" type="text" v-model="defaultState.street">
                     </div>
                     <div>
                         <label for="house">Дом</label>
-                        <input id="house" type="text" v-model="house">
+                        <input id="house" type="text" v-model="defaultState.house">
                     </div>
                 
                     <h2>Паспорт:</h2>  
                     <div>
                         <label for="typeDoc">Тип документа<span class="red">*</span></label>
-                        <select id="typeDoc" v-model="typeDoc">
+                        <select id="typeDoc" v-model="defaultState.typeDoc">
                             <option disabled value="null">Выберите тип документа</option>
                             <option selected value="Паспорт">Паспорт</option>
                             <option value="Свидетельство о рождении"> Свидетельство о рождении</option>
                             <option value="Вод. удостоверение">Вод. удостоверение</option>
                         </select>
-                        <span class="errorMsg" v-if="!$v.typeDoc.required">
+                        <span class="errorMsg" v-if="!$v.defaultState.typeDoc.required">
                                 Необходимо выбрать документ
                         </span>
                     </div>
@@ -145,11 +146,11 @@
                     </div>
                     <div>
                         <label for="dateIssued">Дата выдачи<span class="red">*</span></label>
-                        <input id="dateIssued" type="date" v-model="dateIssued" @blur="$v.dateIssued.$touch()">
-                        <span class="errorMsg" v-if="!$v.dateIssued.valid && $v.dateIssued.$model">
+                        <input id="dateIssued" type="date" v-model="defaultState.dateIssued" @blur="$v.defaultState.dateIssued.$touch()">
+                        <span class="errorMsg" v-if="!$v.defaultState.dateIssued.valid && $v.defaultState.dateIssued.$model">
                             Дата выдачи не может быть больше текущей
                         </span>
-                        <span class="errorMsg" v-if="!$v.dateIssued.required">
+                        <span class="errorMsg" v-if="!$v.defaultState.dateIssued.required">
                         Необходимо заполнить поле
                         </span>
                     </div>  
@@ -191,65 +192,69 @@ export default {
     name: 'App', 
     data() {
         return {
+            defaultState: {
+                surname: null,
+                name: null,
+                secondName: null,
+                dateBirth: null,
+                phone: null,
+                gender: null,
+                groupClients: [],
+                doctor: null,
+                sendSms: false,
+
+                index: null,
+                country: null,
+                region: null,
+                city: null,
+                street: null,
+                house: null,
+
+                typeDoc: null,
+                series: null,
+                number: null,
+                whoIssued: null,
+                dateIssued: null,
+
+                newState: null,
+            },
             successfulIsTrue: false,
-            surname: null,
-            name: null,
-            secondName: null,
-            dateBirth: null,
-            phone: null,
-            gender: null,
-            groupClients: [],
-            doctor: null,
-            sendSms: false,
-
-            index: null,
-            country: null,
-            region: null,
-            city: null,
-            street: null,
-            house: null,
-
-            typeDoc: null,
-            series: null,
-            number: null,
-            whoIssued: null,
-            dateIssued: null,
-
-            newDeal: null,
         }
     },
 
     validations: {
-        surname: {
-            required,
-            valid: val => /^[a-zA-Zа-яёА-ЯЁ\s\-]+$/.test(val),
-        },
-        name: {
-            required,
-            valid: val => /^[a-zA-Zа-яёА-ЯЁ\s\-]+$/.test(val),
-        },
-        dateBirth: {
-            required,
-            valid: val => new Date(val) < new Date(),
-        },
-        phone: {
-            required,
-            phoneValid: val => /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/.test(val),
-        },
-        groupClients: {
-            required,    
-        },
-        city: {
-            required,
-            valid: val => /^[a-zA-Zа-яёА-ЯЁ\s\-]+$/.test(val),
-        },
-        typeDoc: {
-            required,
-        },
-        dateIssued: {
-            required,
-            valid: val => new Date(val) < new Date(),
-        },
+        defaultState: {
+            surname: {
+                required,
+                valid: val => /^[a-zA-Zа-яёА-ЯЁ\s\-]+$/.test(val),
+            },
+            name: {
+                required,
+                valid: val => /^[a-zA-Zа-яёА-ЯЁ\s\-]+$/.test(val),
+            },
+            dateBirth: {
+                required,
+                valid: val => new Date(val) < new Date(),
+            },
+            phone: {
+                required,
+                phoneValid: val => /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/.test(val),
+            },
+            groupClients: {
+                required,    
+            },
+            city: {
+                required,
+                valid: val => /^[a-zA-Zа-яёА-ЯЁ\s\-]+$/.test(val),
+            },
+            typeDoc: {
+                required,
+            },
+            dateIssued: {
+                required,
+                valid: val => new Date(val) < new Date(),
+            },
+        }
     },
     methods: {
         someAction() {
@@ -257,8 +262,7 @@ export default {
         },
 
         action() {
-            this.surname = null;
-            this.$data = Object.assign({}, this.newDeal);
+            this.defaultState = Object.assign({}, this.newState);
         },
 
         clear(){
@@ -266,7 +270,7 @@ export default {
         },
     },
     created: function () {
-        this.newDeal = Object.assign({}, this.$data);
+        this.newState = Object.assign({}, this.defaultState);
         
     },
 }
@@ -278,7 +282,6 @@ export default {
     margin: 0;
     padding: 0;
 }
-
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -299,7 +302,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    padding-top: 30px;
+    padding-top: 10px;
 }
 
 .container > div {
@@ -321,7 +324,7 @@ body {
     margin-bottom: 5px;
     flex-wrap: wrap;
     box-shadow: inset 0px 0px 10px rgba(0,0,0,0.5);
-    padding: 10px 10px;
+    padding: 8px 10px;
     border-radius: 5px;
 }
 
@@ -348,8 +351,7 @@ input, select {
 }
 
 input[type='checkbox'] {
-    margin: auto;
-    
+    margin: auto;   
 }
 
 select {
@@ -359,7 +361,6 @@ select {
 select[multiple='multiple'] {
     overflow-y: hidden;    
 }
-
 
 option[disabled] { 
     display: none; 
@@ -374,7 +375,60 @@ option {
     padding: 6px 0px;
 }
 
+.customCheckbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;    
+}
 
+.customCheckbox+label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  flex-direction: column;
+  margin: auto;
+}
+.customCheckbox+label::before {
+  content: '';
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #adb5bd;
+  border-radius: 0.25em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
+
+.customCheckbox:checked+label::before {
+  border-color: #d35426;
+  background-color: #d35426;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+}
+
+/* стили при наведении курсора на checkbox */
+.customCheckbox:not(:disabled):not(:checked)+label:hover::before {
+  border-color: #b3d7ff;
+}
+/* стили для активного состояния чекбокса (при нажатии на него) */
+.customCheckbox:not(:disabled):active+label::before {
+  background-color: #47494b;
+  border-color: #b3d7ff;
+}
+/* стили для чекбокса, находящегося в фокусе */
+.customCheckbox:focus+label::before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+/* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
+.customCheckbox:focus:not(:checked)+label::before {
+  border-color: #80bdff;
+}
+/* стили для чекбокса, находящегося в состоянии disabled */
+.customCheckbox:disabled+label::before {
+  background-color: #e9ecef;
+}
 
 .errorMsg {
     color: red;
@@ -457,6 +511,7 @@ button:hover {
     cursor: pointer;
     box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
 }
+
 .close:hover {
     background-color: blanchedalmond;
 }
@@ -480,7 +535,6 @@ button:hover {
 .scale-enter  {
     opacity: 0;
 }
-
 
 @media screen and (max-width: 1050px) {
     .container {
@@ -507,8 +561,7 @@ button:hover {
         width: 75%;
         height: 250px;
         padding: 5px;
-    }
-      
+    }    
 }
 
 </style>
