@@ -555,7 +555,7 @@ button:hover {
     }
 
     input, select {
-        width: 100%;
+        width: -webkit-fill-available;
     }
 
     .msgSuccessful {
