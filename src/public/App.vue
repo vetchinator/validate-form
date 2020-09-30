@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="someAction()" @submit="action()">
-        <transition name="scale" appear>  
+        <transition name="appearance" appear>  
         <div v-if="!successfulIsTrue">
             <div class="container">
                 <div> 
@@ -162,12 +162,12 @@
             >Отправить
             </button>
             
-           <!-- <button type="submit"
+            <!-- <button type="submit"
                     @click="successfulIsTrue = !successfulIsTrue"         
             > Отправить
             </button> 
             -->
-            
+                        
         </div> 
         </transition>  
             
@@ -529,11 +529,11 @@ button:hover {
     transform: translateY(-100vh);
 }
 
-.scale-enter-active, .slide-leave-active {
-    transition: all 1s ease;
+.appearance-enter-active, .appearance-leave-active {
+    transition: all 5s ease;
 }
 
-.scale-enter  {
+.appearance-enter, .appearance-leave-to {
     opacity: 0;
 }
 
